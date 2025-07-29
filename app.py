@@ -1,11 +1,21 @@
 import streamlit as st
+from google.oauth2 import service_account
 import pandas as pd
+from pandas_gbq import read_gbq
+import json
 
-# Load the CSV from the local file uploaded in Streamlit Cloud
+service_account_info = st.secrets["gcp_service_account"]
+credentials = service_account.Credentials.from_service_account_info(dict(service_account_info))
+
+# Your query
+query = """
+SELECT wallet, region
+FROM `pi-home-1718508233284.112233.walletregion`
+"""
+
 @st.cache_data
 def load_wallet_data():
-    df = pd.read_csv("wallet_region.csv")
-    # Optionally, clean up columns (strip spaces, etc.)
+    df = read_gbq(query, project_id='your_project', credentials=credentials)
     df.columns = df.columns.str.strip()
     return df
 
