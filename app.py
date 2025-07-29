@@ -8,10 +8,7 @@ service_account_info = st.secrets["gcp_service_account"]
 credentials = service_account.Credentials.from_service_account_info(dict(service_account_info))
 
 # Your query
-query = """
-SELECT 1
-FROM `pi-home-1718508233284.112233.walletregion`
-"""
+query = "SELECT 1"
 
 @st.cache_data
 def load_wallet_data():
