@@ -9,7 +9,7 @@ credentials = service_account.Credentials.from_service_account_info(dict(service
 
 # Your query
 query = """
-SELECT wallet, region
+SELECT 1
 FROM `pi-home-1718508233284.112233.walletregion`
 """
 
