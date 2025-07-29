@@ -25,10 +25,12 @@ st.title("Wallet Region Lookup")
 
 wallet = st.text_input("Enter your wallet address:")
 
-if wallet:
-    match = df[df['wallet'].str.lower() == wallet.strip().lower()]
+if wallet and wallet.startswith("0x") and len(wallet) >= 5:
+    match = df[df['wallet'].str.lower() == wallet]
     if not match.empty:
         region = match['region'].values[0]
         st.success(f"Region: {region}")
     else:
         st.warning("Wallet not found.")
+elif wallet:
+    st.warning("Please enter a valid wallet address (should start with 0x)")
