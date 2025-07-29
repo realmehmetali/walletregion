@@ -15,7 +15,7 @@ FROM `pi-home-1718508233284.112233.walletregion`
 
 @st.cache_data
 def load_wallet_data():
-    df = read_gbq(query, project_id='your_project', credentials=credentials)
+    df = read_gbq(query, project_id='pi-home-1718508233284', credentials=credentials)
     df.columns = df.columns.str.strip()
     return df
 
